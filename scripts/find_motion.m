@@ -1,4 +1,10 @@
 % get the matrix from 4.txt
+
+system('echo "" > results/4_ego_17-43.txt');
+system('echo "" > results/4_2_17-43.txt');
+
+
+
 ego_car_matrix = readmatrix('4.txt');
 
 % read the matrix for the car poses
@@ -15,7 +21,7 @@ frame_transform = [];
 % go through the two matrices and separate out the rotations and
 % translations
 
-for i = 1:length(ego_car_matrix(18:44, :))
+for i = 1:length(ego_car_matrix(17:43, :))
     % here we take the row, and reshape it
     ego_row_rot =  ego_car_matrix(i, 1:9);
     ego_trans = ego_car_matrix(i, 10:12);
@@ -33,7 +39,7 @@ for i = 1:length(car_matrix)
     % similarly deal with the frame car matrix
     car_row_rot = car_matrix(i, 1:9);
     car_trans = car_matrix(i, 10:12);
-    car_rot = reshape(car_row_rot, [3,3])';
+    car_rot = reshape(car_row_rot, [3,3]);
     
     car_rot = [car_rot ; [0,0,0]];
     car_trans = [car_trans, 1];
@@ -81,9 +87,9 @@ for i = 1:length(ego_ground_transform_mat)
     rot = temp(1:3, 1:3);
     trans = temp(1:3,4);
     % now we print this
-    ego_motion_trans = [ego_motion_trans ; trans];
+    ego_motion_trans = [ego_motion_trans ; trans'];
     
-    print_string = sprintf("%f %f", rot, trans);
+    print_string = sprintf("%f %f ", rot, trans);
     disp(print_string);
 end
 
@@ -118,11 +124,30 @@ for i = 1:length(frame_ego_transform_mat)
     rot = temp(1:3, 1:3);
     trans = temp(1:3,4);
     % now we print this
-    frame_motion_trans = [frame_motion_trans ; trans];
+    frame_motion_trans = [frame_motion_trans ; trans'];
     
-    print_string = sprintf("%f %f", rot, trans);
+    print_string = sprintf("%f %f ", rot, trans);
     disp(print_string);
 end
 
 diary off
+
+
+% plotting ego_motion_trans, and frame_motion_trans
+
+ego_x = ego_motion_trans(:,1);
+ego_z = ego_motion_trans(:,3);
+
+plot(ego_x, ego_z);
+hold on;
+% generate plot here
+
+
+frame_x = frame_motion_trans(:,1);
+frame_z = frame_motion_trans(:,3);
+plot(frame_x, frame_z);
+
+hold off;
+% generate plot here
+
 
