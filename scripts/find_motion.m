@@ -39,7 +39,7 @@ for i = 1:length(car_matrix)
     % similarly deal with the frame car matrix
     car_row_rot = car_matrix(i, 1:9);
     car_trans = car_matrix(i, 10:12);
-    car_rot = reshape(car_row_rot, [3,3]);
+    car_rot = reshape(car_row_rot, [3,3])';
     
     car_rot = [car_rot ; [0,0,0]];
     car_trans = [car_trans, 1];
