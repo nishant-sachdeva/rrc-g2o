@@ -33,7 +33,7 @@ for i = 1:length(car_matrix)
     % similarly deal with the frame car matrix
     car_row_rot = car_matrix(i, 1:9);
     car_trans = car_matrix(i, 10:12);
-    car_rot = reshape(car_row_rot, [3,3]);
+    car_rot = reshape(car_row_rot, [3,3])';
     
     car_rot = [car_rot ; [0,0,0]];
     car_trans = [car_trans, 1];
@@ -50,6 +50,7 @@ end
 
 
 % equation to be followed in the next portion
+
 % mat(x, 17) = inverse(mat(17, ground))*mat(x, ground)
 % and then we store mat(x,17) for the next stages and also store it in the
 % file
@@ -70,6 +71,24 @@ end
 
 % enter code for that in place of this line
 %%%%%%%%%%%%%%%%
+diary("results/4_ego_17-43.txt");
+
+ego_motion_trans = [];
+
+for i = 1:length(ego_ground_transform_mat)
+    % here we start printing
+    temp = ego_ground_transform_mat(:,:,i);
+    rot = temp(1:3, 1:3);
+    trans = temp(1:3,4);
+    % now we print this
+    ego_motion_trans = [ego_motion_trans ; trans];
+    
+    print_string = sprintf("%f %f", rot, trans);
+    disp(print_string);
+end
+
+diary off
+
 
 % now we create the frame_ego_transform matrix
 % the equation used for this transform is 
@@ -88,4 +107,22 @@ for i = 1:length(ego_ground_transform_mat)
 end
 
 % now we print this data in another file
+
+diary("results/4_2_17-43.txt");
+
+frame_motion_trans = [];
+
+for i = 1:length(frame_ego_transform_mat)
+    % here we start printing
+    temp = frame_ego_transform_mat(:,:,i);
+    rot = temp(1:3, 1:3);
+    trans = temp(1:3,4);
+    % now we print this
+    frame_motion_trans = [frame_motion_trans ; trans];
     
+    print_string = sprintf("%f %f", rot, trans);
+    disp(print_string);
+end
+
+diary off
+
