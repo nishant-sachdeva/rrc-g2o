@@ -21,10 +21,10 @@ frame_transform = [];
 % go through the two matrices and separate out the rotations and
 % translations
 
-for i = 1:length(ego_car_matrix(17:43, :))
+for i = 1:length(ego_car_matrix(18:44, :))
     % here we take the row, and reshape it
-    ego_row_rot =  ego_car_matrix(i, 1:9);
-    ego_trans = ego_car_matrix(i, 10:12);
+    ego_row_rot =  ego_car_matrix(17+i, 1:9);
+    ego_trans = ego_car_matrix(17+i, 10:12);
     ego_rot = reshape(ego_row_rot, [3,3]);
     ego_rot = [ego_rot ; [0,0,0]];
     ego_trans = [ego_trans, 1];
