@@ -12,6 +12,10 @@
 #include "g2o/types/slam3d/vertex_se3.h"
 #include "g2o/types/slam3d/edge_se3.h"
 
+#include "g2o/types/slam3d/edge_se2.h"
+#include "g2o/types/slam3d/edge_se2.h"
+
+
 #include "g2o/types/slam3d/se3_ops.h"
 
 #include <Eigen/Geometry>
