@@ -321,7 +321,7 @@ int main(int argc, char **argv){
 	processData_("../data/gt_0.txt",    numOfFrames, orbVO);   // orbVOScaled
 	//processData_("../../data/gt_0_scaled.txt",    numOfFrames, orbVO);   // orbVOScaled
 	processData("../data/shapePose_0.txt", numOfFrames, shapePoseHat);  // shapePoseHat
-	processData("../data/shapePose_0.txt",    numOfFrames, shapePose);     // shapePose
+	processData("../data/shapePose_0.txt", numOfFrames, shapePose);     // shapePose
 
 	std::cerr<<"processed"<<std::endl;
 
